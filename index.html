@@ -1,0 +1,1443 @@
+<!doctype html>
+<html xmlns:xi="http://www.w3.org/2001/XInclude">
+   <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+      <title>CL110: Red Hat OpenStack Administration I: Core Operations for Domain Operators</title>
+      <link rel="stylesheet" href="css/reveal.css"/>
+      <link rel="stylesheet" href="css/theme/redhat.css" id="theme"/>
+      <!--Theme used for syntax highlighting of code-->
+      <link rel="stylesheet" href="lib/css/zenburn.css"/>
+      <!--Printing and PDF exports-->
+      <script>
+                    var link = document.createElement( 'link' );
+                    link.rel = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                    document.getElementsByTagName( 'head' )[0].appendChild( link );
+                </script>
+   </head>
+   <body>
+      <div class="reveal">
+         <div class="slides">
+            <section data-state="white"
+                     data-background-image="css/images/RH_Title_Background.png">
+               <img src="css/images/redhat-logo-white.svg" class="title-logo"/>
+               <h2 class="course-title">Red Hat OpenStack Administration I: Core Operations for Domain Operators</h2>
+               <p class="title-color">CL110</p>
+            </section>
+            <section data-state="black">
+               <h2>Welcome</h2>
+            </section>
+            <section data-state="black">
+               <h2>Course Objectives and Structure</h2>
+            </section>
+            <section data-state="black">
+               <h2>Schedule</h2>
+               <table class="schedule_table">
+                  <tr class="table_header" style="background-color: #D9EBF1;">
+                     <td>
+                        <strong>Day 1</strong>
+                     </td>
+                     <td>
+                        <strong>Day 2</strong>
+                     </td>
+                     <td>
+                        <strong>Day 3</strong>
+                     </td>
+                     <td>
+                        <strong>Day 4</strong>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+              Introduction
+            </td>
+                     <td>
+               Managing Red Hat OpenStack Platform Networking 
+            </td>
+                     <td>
+               Providing Additional Storage Strategies 
+            </td>
+                     <td>
+               Automating Customized Cloud Application Launches 
+            </td>
+                  </tr>
+                  <tr>
+                     <td>
+               Introducing Red Hat OpenStack Platform 
+            </td>
+                     <td>
+               Configuring Resources to Launch a Non-public Instance 
+            </td>
+                     <td>
+               Configuring Resources to Launch an Instance with Public Access 
+            </td>
+                     <td>
+               Managing Cloud Application Placement 
+            </td>
+                  </tr>
+                  <tr>
+                     <td>
+               Managing Application Projects in a Multitenant Cloud 
+            </td>
+                     <td>
+               Configuring Virtual Machine System Disks 
+            </td>
+                     <td>
+               Automating Customized Cloud Application Launches 
+            </td>
+                     <td>
+               Comprehensive Review 
+            </td>
+                  </tr>
+                  <tr>
+                     <td>
+               Managing Red Hat OpenStack Platform Networking 
+            </td>
+                     <td>
+               Providing Additional Storage Strategies 
+            </td>
+                     <td/>
+                     <td/>
+                  </tr>
+               </table>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Orientation to the Classroom Environment</h2>
+               </section>
+               <section>
+                  <img src="images/courseintro/cl110-classroom-architecture.svg"/>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>Internationalization</h2>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 1: Introducing Red Hat OpenStack Platform</h1>
+               <p class="goal_title">Goal: Describe OpenStack personas, launch an instance, and describe the OpenStack components and architecture.</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Describe the personas in the cloud ecosystem that characterize the use cases and tasks taught in this course.</p>
+                  </li>
+                  <li>
+                     <p>Create the requisite resources and launch a simple virtual machine instance.</p>
+                  </li>
+                  <li>
+                     <p>Describe the purpose, resources, and terminology of the Red Hat OpenStack Platform core services.</p>
+                  </li>
+                  <li>
+                     <p>Describe a single-site Red Hat OpenStack Platform overcloud architecture, including the purpose and layout of each of the default node roles.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Describing OpenStack Personas</h2>
+               </section>
+               <section>
+                  <h3>Introducing Cloud Personas</h3>
+               </section>
+               <section>
+                  <img src="images/intro/persona-ecosystem.svg"/>
+                  <p>OpenStack persona ecosystem</p>
+               </section>
+               <section>
+                  <h3>OpenStack Personas in this Course</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="multchoice_title"> Quiz:</span>  Describing OpenStack Personas</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Launching an Instance</h2>
+               </section>
+               <section>
+                  <h3>Describing the OpenStackClient</h3>
+               </section>
+               <section>
+                  <h3>Managing Applications and Networks with Projects</h3>
+               </section>
+               <section>
+                  <h3>Launching a Minimal Instance</h3>
+               </section>
+               <section>
+                  <h3>Launching an instance from the Command Line</h3>
+               </section>
+               <section>
+                  <h3>Accessing the Instance Console</h3>
+               </section>
+               <section>
+                  <img src="images/intro/launching-browser-vnc-console.png"/>
+                  <p>The VNC console in a browser</p>
+               </section>
+               <section>
+                  <h3>Managing Resources in the OpenStack Dashboard</h3>
+               </section>
+               <section>
+                  <h3>Launching an instance from the Dashboard</h3>
+               </section>
+               <section>
+                  <img src="images/intro/launching-instance-details.png"/>
+                  <p>The Launch Instance Details window</p>
+               </section>
+               <section>
+                  <img src="images/intro/launching-instance-source.png"/>
+                  <p>The Launch Instance Source window</p>
+               </section>
+               <section>
+                  <img src="images/intro/launching-instances-spawning.png"/>
+                  <p>The Instances page with a spawning instance</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Launching an Instance</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Describing Red Hat OpenStack Platform Services</h2>
+               </section>
+               <section>
+                  <h3>Red Hat OpenStack Platform Overview</h3>
+               </section>
+               <section>
+                  <img src="images/intro/CL110-Service-Overview.png"/>
+                  <p>OpenStack core services</p>
+               </section>
+               <section>
+                  <h3>Services Covered in this Course</h3>
+               </section>
+               <section>
+                  <h3>OpenStack Container Deployment Tools (Kolla)</h3>
+               </section>
+               <section>
+                  <h3>Listing, Verifying, and Managing OpenStack Services</h3>
+               </section>
+               <section>
+                  <h3>Listing the Status of the OpenStack Services</h3>
+               </section>
+               <section>
+                  <h3>Verifying the OpenStack Services</h3>
+               </section>
+               <section>
+                  <h3>Managing the OpenStack Services</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Describing Red Hat OpenStack Platform Services</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Describing a Single-site Overcloud Deployment</h2>
+               </section>
+               <section>
+                  <h3>Describing Red Hat OpenStack Platform Deployments</h3>
+               </section>
+               <section>
+                  <h3>Describing OpenStack Roles</h3>
+               </section>
+               <section>
+                  <img src="images/intro/architecture-deployment.svg"/>
+                  <p>OpenStack nodes and roles</p>
+               </section>
+               <section>
+                  <h3>Describing a Single-site Deployment</h3>
+               </section>
+               <section>
+                  <img src="images/courseintro/cl110-classroom-topology.svg"/>
+                  <p>Example Single-site OpenStack deployment</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="multchoice_title"> Quiz:</span>  Describing a Single-site Overcloud Deployment</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Introducing Red Hat OpenStack Platform</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li> There are several personas in the OpenStack ecosystem, and Red Hat has used the Domain Operator persona to define the use cases and operations for this course. 
+        Your role may include the responsibilities of more than one persona.</li>
+                  <li> OpenStack can be managed using the <code>openstack</code> unified command-line client, or with the browser-based Dashboard.</li>
+                  <li>Launching an instance requires a minimum of three items specified; the image, the flavor, and the network.</li>
+                  <li>OpenStack has many services including Compute, Image, Orchestration, Identity, Networking, and Object Store.</li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary (continued)</h2>
+               <ul class="summary_list">
+                  <li> There are three predefined roles for nodes in an OpenStack deployment; <code>control</code>, <code>compute</code>, and <code>ceph-storage</code>.
+        The predefined roles are collections of related services, however you can create a custom role by combining services in a way that suits your needs.</li>
+                  <li>To ensure high availability of services, there are some minimum node numbers for certain roles. You should have a minimum of three control nodes, and three ceph-storage nodes if you are using Ceph. Compute node capacity should allow for at least a single node failure. That is, if you need N compute nodes to support your workload, you should deploy N+1 compute nodes.</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 2: Managing Application Projects in a Multitenant Cloud</h1>
+               <p class="goal_title">Goal: Create and configure projects with secure user access and sufficient resources to support cloud user application deployment requirements.</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Describe the use of OpenStack domains and projects to segregate applications and users, and create projects and user environments.</p>
+                  </li>
+                  <li>
+                     <p>Manage users and groups accessed from an enterprise identity management directory, and assign users with selected roles and privileges to projects.</p>
+                  </li>
+                  <li>
+                     <p>Manage resource quotas for an individual project, to ensure sufficient resource availability and protection from misuse.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Creating a Project Environment for Managing Applications and Resources</h2>
+               </section>
+               <section>
+                  <h3>Introduction to the Identity Service</h3>
+               </section>
+               <section>
+                  <h3>Managing OpenStack Domains and Projects</h3>
+               </section>
+               <section>
+                  <img src="images/project/project-create-osp16.png"/>
+                  <p>Creating projects on the Dashboard</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Creating a Project Environment for Managing Applications and Resources</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Providing Cloud User Access to Projects</h2>
+               </section>
+               <section>
+                  <h3>Considerations for OpenStack Domains</h3>
+               </section>
+               <section>
+                  <h3>Introducing OpenStack Users</h3>
+               </section>
+               <section>
+                  <h3>Describing OpenStack Roles</h3>
+               </section>
+               <section>
+                  <img src="images/project/keystone-entity-relationship.svg"/>
+                  <p>User and role relationship to projects</p>
+               </section>
+               <section>
+                  <h3>Requesting an Authorization Token Using the Authentication Parameters</h3>
+               </section>
+               <section>
+                  <h3>Managing OpenStack Users</h3>
+               </section>
+               <section>
+                  <video width="320" height="240" controls="">
+                     <source src="" type="video/mp4"/>
+                  </video>
+                  <p>Administering users</p>
+               </section>
+               <section>
+                  <img src="images/project/dashboard-project-members.png"/>
+                  <p>Adding users to a project from the Dashboard</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Providing Cloud User Access to Projects</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Configuring Resource Limits in Projects</h2>
+               </section>
+               <section>
+                  <h3>Introduction to Project Quotas</h3>
+               </section>
+               <section>
+                  <img src="images/project/default-limits.png"/>
+                  <p>Displaying the default limits for compute</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Configuring Resource Limits in Projects</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Managing Application Projects in a Multitenant Cloud</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li>Domains allow an external identity store to be integrated with OpenStack, while keeping the users and groups it contains separate from any other identity source.</li>
+                  <li>Projects restrict access to a set of resources, such as volumes, networks, and instances. They are commonly used to group resources for a specific application. Projects can be nested to create a hierarchy, allowing roles to be assigned at the top level and inherited by child projects.</li>
+                  <li>Three default user roles are provided with OpenStack; admin, member, and reader. The reader role is new, and implemented by many but not all OpenStack components The reader role is used for application credentials.</li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary (continued)</h2>
+               <ul class="summary_list">
+                  <li>There are three authorization scopes that you will use when assigning roles to users. The system scope applies to the OpenStack platform itself. The domain scope applies at the domain level, allowing the creation of projects within a domain. The project scope is used to allow permissions and resource access at the project level.</li>
+                  <li>Quotas allow administrators to restrict the quantity of resources a project may consume. They do not currently operate in a hierarchical method, so administrators must manage quotas for hierarchical projects independently.</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 3: Managing Red Hat OpenStack Platform Networking</h1>
+               <p class="goal_title">Goal: Describe how IP networks are implemented in OpenStack, including fundamental TCP/IP stack behavior, software defined networking elements, and the common types of networks available to self-service cloud users.</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Discuss TCP/IP network stacks concepts, terminology, and the behavior of specific network stack layers.</p>
+                  </li>
+                  <li>
+                     <p>Describe software defined networking, Open Virtual Networking switch architecture, and table-driven flow concepts.</p>
+                  </li>
+                  <li>
+                     <p>Describe and compare the network types available to self-service cloud users, including tenant, external and provider networks.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Reviewing TCP/IP Fundamentals</h2>
+               </section>
+               <section>
+                  <h3>IPv4 Networking</h3>
+               </section>
+               <section>
+                  <h3>IPv4 Addresses</h3>
+               </section>
+               <section>
+                  <img src="images/networking/ipv4subnetexamples-prefix.svg"/>
+                  <p>IPv4 addressing and netmasks</p>
+               </section>
+               <section>
+                  <h3>Ethernet Headers</h3>
+               </section>
+               <section>
+                  <img src="images/networking/ethernet-header.svg"/>
+                  <p>Ethernet headers in a network packet</p>
+               </section>
+               <section>
+                  <h3>Network Devices</h3>
+               </section>
+               <section>
+                  <img src="images/networking/network-devices.svg"/>
+                  <p>Network devices</p>
+               </section>
+               <section>
+                  <h3>Broadcast Domains</h3>
+               </section>
+               <section>
+                  <h3>Integration of IP and Ethernet</h3>
+               </section>
+               <section>
+                  <img src="images/networking/routers.png"/>
+                  <p>Routing packets</p>
+               </section>
+               <section>
+                  <h3>Partitioning with Virtual LAN</h3>
+               </section>
+               <section>
+                  <img src="images/networking/vlan-tag.svg"/>
+                  <p>VLAN header</p>
+               </section>
+               <section>
+                  <h3>GENEVE Tunnels</h3>
+               </section>
+               <section>
+                  <img src="images/networking/geneve.png"/>
+                  <p>GENEVE header</p>
+               </section>
+               <section>
+                  <h3>Software-defined Network Processing</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="multchoice_title"> Quiz:</span>  Reviewing TCP/IP Fundamentals</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Introducing Software-defined Networking</h2>
+               </section>
+               <section>
+                  <h3>Introduction to Open Virtual Network (OVN)</h3>
+               </section>
+               <section>
+                  <h3>OVN Architecture</h3>
+               </section>
+               <section>
+                  <img src="images/networking/ovn-architecture1.svg"/>
+                  <p>OVN architecture</p>
+               </section>
+               <section>
+                  <img src="images/networking/ovn-controlplane.svg"/>
+                  <p>OVN control plane architecture </p>
+               </section>
+               <section>
+                  <h3>OpenFlow</h3>
+               </section>
+               <section>
+                  <img src="images/networking/logical-flow.svg"/>
+                  <p>OVN logical flows</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="multchoice_title"> Quiz:</span>  Introducing Software-defined Networking</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Implementing Tenant, Provider and External Networks</h2>
+               </section>
+               <section>
+                  <h3>OpenStack Networking</h3>
+               </section>
+               <section>
+                  <h3>Project Networking</h3>
+               </section>
+               <section>
+                  <img src="images/networking/networking-provisioning-self-service.svg"/>
+                  <p>The self-service tenant networking scenario</p>
+               </section>
+               <section>
+                  <img src="images/networking/networking-provisioning-self-service-geneve.svg"/>
+                  <p>The self-service tenant networking scenario using tunneling to remote overcloud nodes</p>
+               </section>
+               <section>
+                  <h3>Provider Networks</h3>
+               </section>
+               <section>
+                  <img src="images/networking/networking-provisioning-provider.svg"/>
+                  <p>The provider networking scenario using a data center provided hardware switch with VLANs.</p>
+               </section>
+               <section>
+                  <h3>Viewing Network and Subnet Parameters</h3>
+               </section>
+               <section>
+                  <h3>Viewing the Networks using the Dashboard</h3>
+               </section>
+               <section>
+                  <img src="images/networking/network-desc.png"/>
+                  <p>Network description in the Dashboard</p>
+               </section>
+               <section>
+                  <img src="images/networking/subnet-desc.png"/>
+                  <p>Subnet description in the Dashboard</p>
+               </section>
+               <section>
+                  <img src="images/networking/provider-network.png"/>
+                  <p>Provider network description in the Dashboard</p>
+               </section>
+               <section>
+                  <img src="images/networking/provider-subnet.png"/>
+                  <p>Provider subnet description in the Dashboard</p>
+               </section>
+               <section>
+                  <img src="images/networking/floatingip.png"/>
+                  <p>Floating IP list in the Dashboard</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Implementing Tenant, Provider and External Networks</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Managing Red Hat OpenStack Platform Networking</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li>OVN is the default SDN solution for Red Hat OpenStack Platform. It replaces the OVS ML2 driver and the neutron agent with the OVN ML2 driver. The OVS ML2 driver had some limitations and complications. The OVN ML2 driver addresses those problems.</li>
+                  <li>The OVN database is installed in a central location. It can be installed on a physical node, a virtual node, or on a cluster. The choice of location depends on various factors, including the size of the cloud infrastructure, the geographic dispersion of the cloud, the volume of traffic, and the performance required. The hypervisors must run Open vSwitch for OVN to work.</li>
+                  <li>OVN implements DHCP and OpenStack security groups. The OVN gateway links the overlay network to the physical network. The overall OVN architecture and configuration simplifies OpenStack networking.</li>
+                  <li>Self-service, or tenant, networks are a common network type in many OpenStack installations. They only contain virtual components. Only instances within the project can use tenant networks.</li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary (continued)</h2>
+               <ul class="summary_list">
+                  <li>Provider, or data center, networks are the most common production network type at RHOSP installations. They are defined using the existing data center networks and VLANs. Provider networks are shared and can be configured to be used by any project's instances.</li>
+                  <li>Tenant instances which require external access must be created on a network with a router providing access to the public network. A floating IP address must be added to instance as the fixed IP address assigned at creation cannot be used on the public network.</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 4: Configuring Resources to Launch a Non-public Instance</h1>
+               <p class="goal_title">Goal: Configure the requisite resource types for launching a basic non-public instance, including vCPUs, memory, and a system disk image, and launch an instance of an application component that runs in a tenant network with no public access.</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Define the resources that control the function, size, and capacity of a running instance.</p>
+                  </li>
+                  <li>
+                     <p>Create the network configuration and IP addressing for launching tenant instances.</p>
+                  </li>
+                  <li>
+                     <p>Select and manage relevant parameters for launching a non-public, tenant instance.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Defining a Virtual Machine by Specifying an Image and a Flavor</h2>
+               </section>
+               <section>
+                  <h3>Introduction to Images</h3>
+               </section>
+               <section>
+                  <h3>Describing Image Storage</h3>
+               </section>
+               <section>
+                  <h3>Image Properties</h3>
+               </section>
+               <section>
+                  <h3>Managing Images</h3>
+               </section>
+               <section>
+                  <h3>Introduction to Flavors</h3>
+               </section>
+               <section>
+                  <h3>Managing Flavors</h3>
+               </section>
+               <section>
+                  <h3>Defining Storage in Flavors</h3>
+               </section>
+               <section>
+                  <h3>Coordinating Image and Flavor Sizing</h3>
+               </section>
+               <section>
+                  <h3>Other Parameters in a Flavor</h3>
+               </section>
+               <section>
+                  <h3>Setting the Root User Password for an Instance</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Defining a Virtual Machine by Specifying an Image and a Flavor</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Creating Project Networks and Subnetworks</h2>
+               </section>
+               <section>
+                  <h3>Describing OpenStack Tenant Networks</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Creating Project Networks and Subnetworks</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Launching and Verifying a Non-public Instance</h2>
+               </section>
+               <section>
+                  <h3>Launching an Instance</h3>
+               </section>
+               <section>
+                  <h3>Verifying a Running Instance</h3>
+               </section>
+               <section>
+                  <h3>Verifying Available Resources using the Dashboard</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Launching and Verifying a Non-public Instance</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Configuring Resources to Launch a Non-public Instance</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li>An image is a file containing a virtual disk installed with a bootable operating system. Images are managed by the Image Service (Glance). An image is one of the fundamental requirements for deploying instances.</li>
+                  <li>Images are stored and managed by the Image service, which manages the catalog of images. Depending on configurable attributes, images are available to some or all users.</li>
+                  <li>You must specify a flavor to deploy an instance. The Compute service schedules the deployment by checking the compute nodes for sufficient available resources, as requested by the flavor. If no host (compute node) can be found with sufficient resources, the instance deployment fails.</li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary (continued)</h2>
+               <ul class="summary_list">
+                  <li>Customize a flavor so that hardware requirements meet user needs. In addition to system disk and memory size, and the number of VCPUs, you can define other parameters, such as adding a swap disk or additional ephemeral disk.</li>
+                  <li>Projects are provided with their own networks by the OpenStack Networking Service. These networks are isolated using Virtual Local Area Network (VLAN) segregation (every project network is a network VLAN).</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 5: Configuring Virtual Machine System Disks</h1>
+               <p class="goal_title">Goal: Identify the available choices for configuring, storing and selecting block-based virtual machine system disks, including the choice of ephemeral or persistent disks for specific use cases.</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Describe the purpose, use cases and storage choices when selecting ephemeral disks for instances.</p>
+                  </li>
+                  <li>
+                     <p>Describe the purpose, use cases and storage choices when selecting persistent volumes for instances.</p>
+                  </li>
+                  <li>
+                     <p>Manage block-based storage elements and activities for common application data use cases.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Configuring Ephemeral Disks</h2>
+               </section>
+               <section>
+                  <h3>Storage in Red Hat OpenStack Platform</h3>
+               </section>
+               <section>
+                  <h3>Describing Block Storage</h3>
+               </section>
+               <section>
+                  <h3>Recommended Practices for Block Storage</h3>
+               </section>
+               <section>
+                  <h3>Back-end Files for Ephemeral Storage</h3>
+               </section>
+               <section>
+                  <img src="images/vmdisks/cassandra-on-ephemeral.svg"/>
+                  <p>Cassandra on ephemeral storage</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Configuring Ephemeral Disks</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Configuring Persistent Disks</h2>
+               </section>
+               <section>
+                  <h3>Persistent Storage in Red Hat OpenStack Platform</h3>
+               </section>
+               <section>
+                  <h3>Persistent Volumes</h3>
+               </section>
+               <section>
+                  <h3>Supporting Legacy Application Storage Requirements</h3>
+               </section>
+               <section>
+                  <h3>Managing Volumes Using the CLI</h3>
+               </section>
+               <section>
+                  <h3>Managing Volumes using the Dashboard</h3>
+               </section>
+               <section>
+                  <img src="images/vmdisks/volume-create.png"/>
+                  <p>Creating a volume in the Dashboard</p>
+               </section>
+               <section>
+                  <img src="images/vmdisks/volume-manage.png"/>
+                  <p>Managing a volume in the Dashboard</p>
+               </section>
+               <section>
+                  <img src="images/vmdisks/volume-detach.png"/>
+                  <p>Detaching a volume in the Dashboard</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Configuring Persistent Disks</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Managing Volumes and Snapshots</h2>
+               </section>
+               <section>
+                  <h3>Managing Volumes</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Managing Volumes and Snapshots</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Configuring Virtual Machine System Disks</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li>Instances are ephemeral by default, meaning that the virtual disks are destroyed with the instance.</li>
+                  <li>To create an instance with additional ephemeral storage, create a flavor that specifies an ephemeral disk size greater than zero, and then launch an instance using that flavor.</li>
+                  <li>Persistent volumes are created independently of the instance, and can be attached while the instance is running.</li>
+                  <li>Volumes can be transferred between projects.</li>
+                  <li>Snapshots are stored in the same location as volumes, and define the state of a volume at a point in time.</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 6: Providing Additional Storage Strategies</h1>
+               <p class="goal_title">Goal: Identify the available choices for additional cloud storage techniques, including object-based storage, network file sharing, and volumes sourced from a file sharing service.</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Describe the purpose, benefits and operations for object-based storage use cases. Create and manage containers, folders and objects.</p>
+                  </li>
+                  <li>
+                     <p>Analyze and compare the common technologies for general object storage use cases.</p>
+                  </li>
+                  <li>
+                     <p>Provide remote file sharing services for common application file share storage use cases.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Implementing Object Storage</h2>
+               </section>
+               <section>
+                  <h3>Introducing Object Storage</h3>
+               </section>
+               <section>
+                  <h3>Defining Object Storage Use Cases</h3>
+               </section>
+               <section>
+                  <h3>Describing Object Characteristics</h3>
+               </section>
+               <section>
+                  <h3>Object Storage Technology</h3>
+               </section>
+               <section>
+                  <h3>The Use of Object Storage in OpenStack</h3>
+               </section>
+               <section>
+                  <h3>Application Use Cases for Object Storage</h3>
+               </section>
+               <section>
+                  <h3>Using Object Storage in the Dashboard</h3>
+               </section>
+               <section>
+                  <img src="images/storage/container-create.png"/>
+                  <p>Container creation in the Dashboard</p>
+               </section>
+               <section>
+                  <img src="images/storage/object-details.png"/>
+                  <p>Object details in the Dashboard</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Implementing Object Storage</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Analyzing Object Storage Technologies</h2>
+               </section>
+               <section>
+                  <h3>Comparing Object Storage</h3>
+               </section>
+               <section>
+                  <h3>Comparing Swift, Ceph RGW, and Amazon S3</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Analyzing Object Storage Technologies</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Implementing NFS Shared Storage</h2>
+               </section>
+               <section>
+                  <h3>Basic Shared File Systems Operations</h3>
+               </section>
+               <section>
+                  <h3>Describing the Shared File System Service (manila)</h3>
+               </section>
+               <section>
+                  <h3>Describing the Shared File System Service Architecture</h3>
+               </section>
+               <section>
+                  <img src="images/storage/manila-architecture.svg"/>
+                  <p>The OpenStack Shared File System service architecture</p>
+               </section>
+               <section>
+                  <h3>NFS-Ganesha</h3>
+               </section>
+               <section>
+                  <h3>Shared File System on Ceph via CephFS Native Driver</h3>
+               </section>
+               <section>
+                  <h3>Managing Shared File Systems Using the CephFS Native Driver</h3>
+               </section>
+               <section>
+                  <h3>Shared File Systems Use Cases</h3>
+               </section>
+               <section>
+                  <h3>Using Shared File Systems in the Dashboard</h3>
+               </section>
+               <section>
+                  <img src="images/storage/create-rule.png"/>
+                  <p>Share rule creation in the Dashboard</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Implementing NFS Shared Storage</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Providing Additional Storage Strategies</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li>An object is stored as a binary file along with metadata which is stored in the file's extended attributes (xattrs). Objects can be text files, videos, images, emails, or virtual machine images. Objects are simply identified with a GUID and have no relationship to other objects in the container.</li>
+                  <li>Many of the OpenStack services use swift for object storage. Glance creates images but cannot actually store them, it utilizes swift as an image store Cinder backups can also be stored in swift. The Nova service can create snapshots of instances which are passed to Glance for storage in a swift container. Ironic stores introspection results as objects in swift. Ironic bare metal images are stored in a swift container. Swift also supports the Amazon Simple Storage Service (S3) API.</li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary (continued)</h2>
+               <ul class="summary_list">
+                  <li>The choice of object storage technology can be affected by several factors, including cost, existing storage investment, and application requirements. However, the decision should also be based on an understanding of the technologies and their features as they pertain to business. needs.</li>
+                  <li>The OpenStack Shared File System service enables tenant users to provision and manage network accessible shared file systems or shares. Tenant users access the shares from instances as remote file systems.</li>
+                  <li>Manila is designed with the ideal NAS architecture in mind. Manila supports several different protocols, including NFS, CIFS, CephFS, MAPRFS, HDFS, and GlusterFS. It offers many different features, including quota control, tenant driven share replication, snapshots for cloning, and access control and authentication services.</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 7: Configuring Resources to Launch an Instance with Public Access</h1>
+               <p class="goal_title">Goal: Identify and configure the additional resource types required to launch instances with public access, including networking and access security elements, for specific use cases.</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Manage the provider and external network configuration and IP addressing needed to launch instances with public access.</p>
+                  </li>
+                  <li>
+                     <p>Describe the use cases and configuration choices when selecting a router configuration and floating IPs for tenant network instances.</p>
+                  </li>
+                  <li>
+                     <p>Manage the security groups and key pairs that control access to tenant and provider instances with public access.</p>
+                  </li>
+                  <li>
+                     <p>Select and manage relevant parameters for launching instances with public access, for common use cases.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Managing Provider and External Networks</h2>
+               </section>
+               <section>
+                  <h3>Describing OpenStack Networking for Public Applications</h3>
+               </section>
+               <section>
+                  <h3>Managing Networks Using the CLI</h3>
+               </section>
+               <section>
+                  <h3>Managing Networks Using the Dashboard</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Managing Provider and External Networks</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Managing Routers and Floating IPs</h2>
+               </section>
+               <section>
+                  <h3>Hosting Public Instances on Tenant Networks</h3>
+               </section>
+               <section>
+                  <h3>Introduction to Routers</h3>
+               </section>
+               <section>
+                  <h3>Managing Routers in OpenStack</h3>
+               </section>
+               <section>
+                  <h3>Introduction to Floating IP Addresses</h3>
+               </section>
+               <section>
+                  <h3>Managing Floating IP Addresses in OpenStack</h3>
+               </section>
+               <section>
+                  <h3>Processing Network Packets</h3>
+               </section>
+               <section>
+                  <img src="images/public/CL110-OSP16-one-host-two-project.png"/>
+                  <p>OVN logical flows</p>
+               </section>
+               <section>
+                  <h3>Managing Routers From the Dashboard</h3>
+               </section>
+               <section>
+                  <h3>Managing Floating IP Addresses Using the Dashboard</h3>
+               </section>
+               <section>
+                  <img src="images/public/routers-network-topology.png"/>
+                  <p>Displaying the network topology</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Managing Routers and Floating IPs</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Managing Secure Instance Access</h2>
+               </section>
+               <section>
+                  <h3>Managing Access</h3>
+               </section>
+               <section>
+                  <h3>Implementing Key Pairs in OpenStack</h3>
+               </section>
+               <section>
+                  <h3>Managing Key Pairs</h3>
+               </section>
+               <section>
+                  <img src="images/public/key-process.svg"/>
+                  <p>Using keys to connect to remote instances</p>
+               </section>
+               <section>
+                  <h3>Managing Key Pairs in the Dashboard</h3>
+               </section>
+               <section>
+                  <h3>Introducing Security Groups</h3>
+               </section>
+               <section>
+                  <h3>Describing Security Groups</h3>
+               </section>
+               <section>
+                  <img src="images/public/security-groups-basic.svg"/>
+                  <p>Using security rules to define access</p>
+               </section>
+               <section>
+                  <img src="images/public/security-groups-application.svg"/>
+                  <p>Using security rules to manage access</p>
+               </section>
+               <section>
+                  <h3>Managing Security Groups and Rules Using the CLI</h3>
+               </section>
+               <section>
+                  <h3>Managing Security Groups in the Dashboard</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Managing Secure Instance Access</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Launching and Verifying an Instance with Public Access</h2>
+               </section>
+               <section>
+                  <h3>Defining an Instance with Public Access</h3>
+               </section>
+               <section>
+                  <h3>Launching an Instance with Public Access</h3>
+               </section>
+               <section>
+                  <h3>Verifying an Instance with Public Access</h3>
+               </section>
+               <section>
+                  <h3>Verifying Instance Services</h3>
+               </section>
+               <section>
+                  <h3>Troubleshooting Connections to Instances</h3>
+               </section>
+               <section>
+                  <h3>Launching an Instance Using the Dashboard</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Launching and Verifying an Instance with Public Access</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Configuring Resources to Launch an Instance with Public Access</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li>Public-facing applications require deploying an instance either on a provider network using an external network with DNS and DHCP configured, or on a tenant network with an associated floating IP address.</li>
+                  <li>Provider networks can be of type local, Flat, VLAN, GRE, VXLAN, or GENEVE. Provider networks are the most common type of network used by OpenStack clients.</li>
+                  <li>Routers are a logical OpenStack component that forwards packets between different networks. An external network must have an allocation pool to provide floating IP addresses to be used for public access path for tenant networks using routers.</li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary (continued)</h2>
+               <ul class="summary_list">
+                  <li>SSH key pairs allow passwordless, secure, and trusted access to remote servers. You can create new key pairs in OpenStack, or import existing key pairs. When a new key pair is created, the public key is stored in the Compute service database and the private key is stored locally.</li>
+                  <li>An instance with public access is an instance that has access to the external network. A public instance should be protected using a key pair and a security group.</li>
+                  <li> A key pair cannot be attached to an instance after creation. The instance must be deleted and recreated with the <code>--key-name</code> option.</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 8: Automating Customized Cloud Application Launches</h1>
+               <p class="goal_title">Goal:  Configure and deploy a typical multitier cloud application stack, defined as an architected template of scalable VM instances, including per-instance launch customizations. </p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Configure an instance with run time customizations performed at launch.</p>
+                  </li>
+                  <li>
+                     <p>Describe the architecture of common cloud application examples.</p>
+                  </li>
+                  <li>
+                     <p>Describe a 3-tier web application, as defined in the stack template used to launch the application.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Customizing an Instance at Launch with Cloud-init</h2>
+               </section>
+               <section>
+                  <h3>Cloud-init</h3>
+               </section>
+               <section>
+                  <img src="images/cloudapps/customize-instance.png"/>
+                  <p>Customizing an instance while launching in the Dashboard</p>
+               </section>
+               <section>
+                  <img src="images/cloudapps/customize-horizon-cloud-init-flow-chart.svg"/>
+                  <p>Customizing an instance using cloud-init</p>
+               </section>
+               <section>
+                  <h3>Custom Scripts</h3>
+               </section>
+               <section>
+                  <h3>Customizing Instances</h3>
+               </section>
+               <section>
+                  <h3>Verifying Instance Customization</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Customizing an Instance at Launch with Cloud-init</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Describing Cloud Application Architecture</h2>
+               </section>
+               <section>
+                  <h3>Describing Cloud Application Architecture</h3>
+               </section>
+               <section>
+                  <h3>Structure of a Cloud-based Common Stack</h3>
+               </section>
+               <section>
+                  <h3>Describing 3-tier Web Application Architecture</h3>
+               </section>
+               <section>
+                  <img src="images/cloudapps/3-tier-webapp.svg"/>
+                  <p>3-tier Web Application Architecture Overview</p>
+               </section>
+               <section>
+                  <h3>Analyzing 3-tier Web Application Hot Files</h3>
+               </section>
+               <section>
+                  <h3>Application Credentials</h3>
+               </section>
+               <section>
+                  <h3>Create an Application Credential Using the Dashboard</h3>
+               </section>
+               <section>
+                  <img src="images/cloudapps/application_credential.png"/>
+                  <p>Creating an application credential</p>
+               </section>
+               <section>
+                  <img src="images/cloudapps/dashboard-application-credential.png"/>
+                  <p>Creating an application credential</p>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="multchoice_title"> Quiz:</span>  Describing Cloud Application Architecture</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Launching a Cloud Application Stack</h2>
+               </section>
+               <section>
+                  <h3>The Orchestration Service</h3>
+               </section>
+               <section>
+                  <img src="images/cloudapps/orchestration-flow-chart.svg"/>
+                  <p>Orchestration flow chart</p>
+               </section>
+               <section>
+                  <h3>Deploying 3-tier Web Application Architecture</h3>
+               </section>
+               <section>
+                  <h3>Creating a 3-tier Web Application from the Dashboard</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="checklist_title"> Guided Exercise:</span>  Launching a Cloud Application Stack</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Automating a Customized Cloud Application Launch</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li>OpenStack uses cloud-init to customize an instance during deployment, for tasks such as injecting SSH public keys and configuring the host name. Cloud users can also pass user data to cloud-init to perform customization of the operating system or applications. Cloud-init accepts user data in several formats, including raw shell scripts and cloud-config formatted YAML.</li>
+                  <li>Applications designed to take advantage of a cloud architecture utilize features such as load balancing, dynamic scaling, and a mixture of ephemeral and persistent storage for instances. Existing enterprise applications can be moved to the cloud without altering the architecture, however this is more costly in the long term.</li>
+                  <li>Cloud applications deployed on OpenStack can be defined as a stack, using Heat templates. These templates can create any number of OpenStack resources, such as networks, routers, security groups and rules, instances, and load balancers.</li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary (continued)</h2>
+               <ul class="summary_list">
+                  <li> Heat templates have three main sections. The <code>parameters</code> section allows arguments to be passed in. The <code>resources</code> section defines the OpenStack objects to create. Finally, the <code>outputs</code> section defines values that can be output after the stack has been deployed.</li>
+                  <li>Users can create application credentials, allowing deployed applications to authenticate to OpenStack services.</li>
+                  <li> Application stacks are managed using the various subcommands of the <code>openstack stack</code> command.</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 9: Managing Cloud Application Placement</h1>
+               <p class="goal_title">Goal: To introduce overcloud layouts more complex than a single site, and explain the management resources to control the placement of launched instances, including segregation elements such as cells and availability zones, and placement attributes such as requisite compute node resources.</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Describe the architecture and organization of overcloud deployments, for common vertical market use cases.</p>
+                  </li>
+                  <li>
+                     <p>Describe and manage the placement service and filters which are used to control where application instances launch.</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Describing Multi-site Overcloud Deployments</h2>
+               </section>
+               <section>
+                  <h3>Overcloud Design Considerations for Multiple Sites</h3>
+               </section>
+               <section>
+                  <img src="images/placement/single-stack.svg"/>
+                  <p>Single stack using availability zones</p>
+               </section>
+               <section>
+                  <h3>Segregation Structures</h3>
+               </section>
+               <section>
+                  <img src="images/placement/aggregates.svg"/>
+                  <p>Host aggregates</p>
+               </section>
+               <section>
+                  <h3>Limitations of the Dashboard</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="multchoice_title"> Quiz:</span>  Describing Multi-site Overcloud Deployments</h2>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Configuring the Placement Service</h2>
+               </section>
+               <section>
+                  <h3>Describing the Placement Service</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="multchoice_title"> Quiz:</span>  Configuring the Placement Service</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Managing Cloud Application Placement</h2>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary</h2>
+               <ul class="summary_list">
+                  <li>You can perform a multisite deployment using a single or multiple stacks. Stacks can be managed, scaled, and updated separately.</li>
+                  <li> Not all nodes within a stack need to be located in the same physical location. The <code>openstack stack list</code> command is used to list all available stacks within the overcloud.</li>
+                  <li>Hyperconverged is a node configuration that combines a normal hypervisor compute role with local Ceph OSDs on the same compute node. Red Hat Hyperconverged Infrastructure always uses Ceph as the storage component.</li>
+                  <li>Resource segregation is important to permit large horizontal scalability for cloud applications. It means that infrastructure can be grouped based on physical characteristics or functionality. Workload segregation can work at host level or CPU level.</li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <h2 class="summary-title">Summary (continued)</h2>
+               <ul class="summary_list">
+                  <li>The Placement service offers a REST API stack and data model used to track resource provider inventories and usage. It includes a database to store information from the overcloud infrastructure, such as node attributes and location, CPU count, and free and used memory.</li>
+                  <li>The resource provider manages quantitative aspects at the boot request. It has a collection of inventory and allocation objects to manage these quantitative requests. However, the resource provider also needs to manage nonconsumable, or qualitative, resources.</li>
+               </ul>
+            </section>
+            <section data-state="white"
+                     data-background-image="css/images/RH_Chapter_Title_Background2.png">
+               <h1 class="course-title">Chapter 10: Comprehensive Review</h1>
+               <p class="goal_title">Goal:  Review tasks from Red Hat OpenStack Administration I: Core Operations for Domain Operators</p>
+               <br/>
+               <p class="objective_list_title">Objectives:</p>
+               <ul class="objective_list">
+                  <li>
+                     <p>Review tasks from Red Hat OpenStack Administration I: Core Operations for Domain Operators</p>
+                  </li>
+               </ul>
+            </section>
+            <section data-state="black">
+               <section>
+                  <h2>Comprehensive Review</h2>
+               </section>
+               <section>
+                  <h3>Reviewing Red Hat OpenStack Administration I: Core Operations for Domain Operators</h3>
+               </section>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Configure a Project and Resources</h2>
+            </section>
+            <section data-state="black">
+               <h2>
+                  <span class="lab_title"> Lab:</span>  Deploy a 3 Tier Application Stack</h2>
+            </section>
+         </div>
+         <div class="logo"> </div>
+      </div>
+      <div class="versionString">
+         <p>CL110-RHOSP16.1-en-2-20210428</p>
+      </div>
+      <div class="copyright">
+         <p>Copyright &copy;<script>
+                        document.write(new Date().getFullYear())
+                        
+                    </script> Red Hat, Inc.</p>
+      </div>
+      <script src="lib/js/head.min.js"> </script>
+      <script src="js/reveal.js"> </script>
+      <script>
+                    // More info about config & dependencies:
+                    // - https://github.com/hakimel/reveal.js#configuration
+                    // - https://github.com/hakimel/reveal.js#dependencies
+                    Reveal.initialize({
+                    history: true,
+                    slideNumber: 'h.v',
+                    dependencies: [{
+                    src: 'plugin/markdown/marked.js'
+                    },
+                    {
+                    src: 'plugin/markdown/markdown.js'
+                    },
+                    {
+                    src: 'plugin/menu/menu.js'
+                    },
+                    {
+                    src: 'plugin/notes/notes.js',
+                    async: true
+                    },
+                    {
+                    src: 'plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function() {
+                    hljs.initHighlightingOnLoad();
+                    }
+                    },
+                    // Zoom in and out with Alt+click
+                    { src: 'plugin/zoom-js/zoom.js', async: true }
+                    ],
+                    menu: {
+                    side: 'left',
+                    themes: false,
+                    transitions: false,
+                    useTextContentForMissingTitles: true,
+                    }
+                    });
+                    
+                    Reveal.addEventListener('white', function () {
+                    var colorVaryingClasses = ['versionString', 'copyright', 'slide-number']
+                    for (var j = 0, k = colorVaryingClasses.length; j < k; j++) {
+                    // Called each time the slide with the "white" state is made visible
+                    var elements = document.getElementsByClassName(colorVaryingClasses[j]);
+                    for (var i = 0, l = elements.length; i < l; i++) {
+                    elements[i].style.color = "white";
+                    }
+                    }
+                    
+                    var state = Reveal.getState();
+                    
+                    var menu = document.querySelector('.slide-menu-button');
+                    
+                    if (menu) {
+                    menu.classList.add("white");
+                    menu.classList.remove("black");
+                    }
+                    
+                    var bottomLogo = document.querySelector('.logo');
+                    
+                    if (state.indexh == 0) {
+                    bottomLogo.style.display = "none";
+                    } else {
+                    bottomLogo.style.backgroundImage = "url('css/images/redhat-logo-white.svg')";
+                    }
+                    
+                    var buttonRight = document.querySelector('.navigate-right');
+                    buttonRight.style.borderLeftColor = "white";
+                    
+                    var buttonLeft = document.querySelector('.navigate-left');
+                    buttonLeft.style.borderRightColor = "white";
+                    
+                    });
+                    
+                    Reveal.addEventListener('black', function () {
+                    var colorVaryingClasses = ['versionString', 'copyright', 'slide-number']
+                    
+                    for (var j = 0, k = colorVaryingClasses.length; j < k; j++) {
+                    // Called each time the slide with the "white" state is made visible
+                    var elements = document.getElementsByClassName(colorVaryingClasses[j]);
+                    for (var i = 0, l = elements.length; i < l; i++) {
+                    elements[i].style.color = "black";
+                    }
+                    }
+                    
+                    var menu = document.querySelector('.slide-menu-button');
+                    
+                    if (menu) {
+                    menu.classList.add("black");
+                    menu.classList.remove("white");
+                    }
+                    
+                    var bottomLogo = document.querySelector('.logo');
+                    
+                    bottomLogo.style.display = "block";
+                    bottomLogo.style.backgroundImage = "url('css/images/redhat-logo.svg')";
+                    
+                    var buttonRight = document.querySelector('.navigate-right');
+                    buttonRight.style.borderLeftColor = "#CC0000";
+                    
+                    var buttonLeft = document.querySelector('.navigate-left');
+                    buttonLeft.style.borderRightColor = "#CC0000";
+                    
+                    });
+                    
+                </script>
+   </body>
+</html>
